@@ -141,7 +141,9 @@ public class MyCallBack extends ItemTouchHelper.Callback {
         if (dY >= (recyclerView.getHeight()
                 - viewHolder.itemView.getBottom()//item底部距离recyclerView顶部高度
                 - CommonUtils.getPixelById(R.dimen.article_post_delete))) {//拖到删除处
+
             dragListener.deleteState(true);
+
             if (up) {//在删除处放手，则删除item
                 viewHolder.itemView.setVisibility(View.INVISIBLE);//先设置不可见，如果不设置的话，会看到viewHolder返回到原位置时才消失，因为remove会在viewHolder动画执行完成后才将viewHolder删除
                 originImages.remove(viewHolder.getAdapterPosition());
@@ -152,10 +154,15 @@ public class MyCallBack extends ItemTouchHelper.Callback {
             }
         } else {//没有到删除处
             if (View.INVISIBLE == viewHolder.itemView.getVisibility()) {//如果viewHolder不可见，则表示用户放手，重置删除区域状态
+
                 dragListener.dragState(false);
             }
+
             dragListener.deleteState(false);
+
         }
+
+        // 绘制
         super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
     }
 
@@ -189,6 +196,9 @@ public class MyCallBack extends ItemTouchHelper.Callback {
         return super.getAnimationDuration(recyclerView, animationType, animateDx, animateDy);
     }
 
+    /**
+     * 用于外部监听
+     */
     interface DragListener {
         /**
          * 用户是否将 item拖动到删除处，根据状态改变颜色

@@ -84,6 +84,7 @@ public class PostImagesActivity extends AppCompatActivity {
         postArticleImgAdapter = new PostArticleImgAdapter(mContext, dragImages);
         rcvImg.setLayoutManager(new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL));
         rcvImg.setAdapter(postArticleImgAdapter);
+
         MyCallBack myCallBack = new MyCallBack(postArticleImgAdapter, dragImages, originImages);
         itemTouchHelper = new ItemTouchHelper(myCallBack);
         itemTouchHelper.attachToRecyclerView(rcvImg);//绑定RecyclerView
